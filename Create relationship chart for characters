@@ -1,0 +1,86 @@
+#In this SQL code, I'm querying a database that shows relationships between characters of the show MDZS.
+
+CREATE TABLE mdzs (id INTEGER PRIMARY KEY,
+    name TEXT,
+    clan TEXT);
+
+INSERT INTO mdzs (name, clan) VALUES ("Wei Ying", "Yunmeng");
+INSERT INTO mdzs (name, clan) VALUES ("Lan Zhan", "Gusu");
+INSERT INTO mdzs (name, clan) VALUES ("Jiang Cheng", "Yunmeng");
+INSERT INTO mdzs (name, clan) VALUES ("Jiang YanLi", "Yunmeng");
+INSERT INTO mdzs (name, clan) VALUES ("Lan XiChen", "Gusu");
+INSERT INTO mdzs (name, clan) VALUES ("Jin Zixuan", "Jin");
+INSERT INTO mdzs (name, clan) VALUES ("Jin GuangYao", "Jin");
+INSERT INTO mdzs (name, clan) VALUES ("Wen Ning", "Wen");
+INSERT INTO mdzs (name, clan) VALUES ("Wei Qing", "Wen");
+INSERT INTO mdzs (name, clan) VALUES ("Nie HuaiSang", "Nie");
+INSERT INTO mdzs (name, clan) VALUES ("Nie MingJue", "Nie");
+
+SELECT * FROM mdzs;
+
+CREATE TABLE relations (id INTEGER PRIMARY KEY, character1_id INTEGER, name TEXT, character2_id INTEGER);
+
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "married", 2);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "sibling", 3);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "sibling", 4);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "in-law", 5);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "in-law", 1);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "enemy", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "friend", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "friend", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "friend", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (1, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "in-law", 3);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "in-law", 4);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "sibling", 5);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "in-law", 6);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "enemy", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "know", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "know", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (2, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "sibling", 4);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "in-law", 5);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "in-law", 6);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "enemy", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "know", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "crush", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "friend", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (3, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "know", 5);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "married", 6);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "in-law", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "know", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "know", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (4, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "crush", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "know", 6);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "know", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "know", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (5, "friend", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (6, "sibling", 7);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (6, "know", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (6, "know", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (6, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (6, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (7, "enemy", 8);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (7, "enemy", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (7, "enemy", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (7, "enemy", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (8, "sibling", 9);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (8, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (8, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (9, "know", 10);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (9, "know", 11);
+INSERT INTO relations (character1_id, name, character2_id) VALUES (10, "sibling", 11);
+
+SELECT relations.name, a.name, b.name
+    FROM relations
+    JOIN mdzs a
+    ON relations.character1_id = a.id
+    JOIN mdzs b
+    ON relations.character2_id = b.id
+    ORDER BY relations.name DESC;
+
