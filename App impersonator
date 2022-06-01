@@ -1,0 +1,21 @@
+#In this SQL code, I'm querying a database that's impersonating a user for an otome game app.
+
+CREATE TABLE otome (id INTEGER PRIMARY KEY, username TEXT, coin INTEGER, progress TEXT, rating INTEGER, review TEXT);
+
+INSERT INTO otome (username, coin, progress, rating, review) VALUES ("wid", 2000, "epilogue", 5, "Best story ever");
+INSERT INTO otome (username, coin, progress, rating, review) VALUES ("tina", 300, "chapter 14", 5, "I love this character");
+INSERT INTO otome (username, coin, progress, rating, review) VALUES ("baddie", 100, "prologue", 2, "Lame premise and cliche");
+INSERT INTO otome (username, coin, progress, rating, review) VALUES ("curious", 50, "prologue", 3, "Maybe, didn't finish");
+INSERT INTO otome (username, coin, progress, rating, review) VALUES ("whatever", 1700, "chapter 5", 4, "Interesting so far");
+
+#Scenario where user update reading progress and rating and review of the story.
+
+SELECT * FROM otome;
+
+UPDATE otome SET progress = "epilogue", rating = 5, review = "updated: finished and I love the ending" WHERE id = 5;
+
+#Scenario where user delete account from app.
+SELECT * FROM otome;
+
+DELETE FROM otome WHERE id = 4;
+SELECT * FROM otome;
