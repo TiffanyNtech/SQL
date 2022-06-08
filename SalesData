@@ -36,4 +36,40 @@ SELECT count(acctnum), AVG(quantity)*price AS avg_spent
 FROM BIT_DB.customers customers
 JOIN BIT_DB.FebSales Feb
 ON customers.order_id = Feb.orderID
-WHERE Feb.quantity > 2
+WHERE Feb.quantity > 2;
+
+#8- List all the products sold in Los Angeles in February, and include how many of each were sold.
+SELECT distinct product, sum(quantity)
+FROM BIT_DB.FebSales
+WHERE location like '%Los Angeles%';
+
+#9- Which locations in New York received at least 3 orders in January, and how many orders did they each receive?
+SELECT location, count(orderID)
+FROM BIT_DB.JanSales
+WHERE location like '%NY%'
+GROUP by location
+HAVING count(orderID) > 2;
+
+#10- How many of each type of headphone were sold in February?
+SELECT distinct Product, sum (quantity)
+FROM BIT_DB.FebSales
+WHERE Product like '%headphone%'
+GROUP by product;
+
+#11- What was the average amount spent per account in February?
+SELECT AVG(Feb.quantity*price) 
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON Feb.orderID = cust.order_id;
+
+#12- What was the average quantity of products purchased per account in February?
+SELECT SUM(Feb.quantity) / COUNT(cust.acctnum)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON Feb.orderID = cust.order_id;
+
+#13- Which product brought in the most revenue in January and how much revenue did it bring in total?
+SELECT distinct product, sum(quantity)*price as revenue
+FROM BIT_DB.JanSales
+GROUP by product
+ORDER BY revenue DESC LIMIT 1;
