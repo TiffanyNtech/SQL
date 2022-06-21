@@ -1,0 +1,24 @@
+#1. Query the total population of all cities in CITY where District is California.
+Select SUM(population) from CITY where district = 'California';
+
+#2. Query the average population of all cities in CITY where District is California.
+Select AVG(population) from City Where district = 'California';
+
+#3. Query the average population for all cities in CITY, rounded down to the nearest integer.
+Select ROUND(AVG(population)) From CITY;
+
+#4. Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+Select SUM(population) from city where countrycode = 'JPN';
+
+#5. Query the difference between the maximum and minimum populations in CITY.
+select Max(population) - Min(population) from CITY;
+
+#6. Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, 
+but did not realize her keyboard's 0 key was broken until after completing the calculation. 
+She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.
+Write a query calculating the amount of error (i.e.: average monthly salaries), and round it up to the next integer.
+SELECT CEILING(AVG(salary) - AVG(Replace(salary, '0', '')))
+From Employees;
+
+#7. Query a count of the number of cities in CITY having a Population larger than 100,000.
+Select Count(name) From City Where population > 100000;
