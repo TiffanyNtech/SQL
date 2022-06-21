@@ -32,7 +32,7 @@ WHERE location = "548 Lincoln St, Seattle, WA 98101"
 GROUP BY product;
 
 #7- How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
-SELECT count(acctnum), AVG(quantity)*price AS avg_spent
+SELECT count(acctnum), AVG(quantity*price) AS avg_spent
 FROM BIT_DB.customers customers
 JOIN BIT_DB.FebSales Feb
 ON customers.order_id = Feb.orderID
