@@ -22,3 +22,35 @@ From Employees;
 
 #7. Query a count of the number of cities in CITY having a Population larger than 100,000.
 Select Count(name) From City Where population > 100000;
+
+#8. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings. 
+Then print these values as  space-separated integers.
+Select Max(salary*months), count(*)
+From Employee
+where salary*months = (select max(salary*months) from employee);
+
+#9. Write a query the following two values from the STATION table:
+The sum of all values in LAT_N rounded to a scale of  decimal places.
+The sum of all values in LONG_W rounded to a scale of  decimal places.
+SELECT Round(sum(LAT_N),2), Round(sum(Long_W),2) From station;
+
+#10. Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 38.7880  and less than 137.2345 . Truncate your answer to 4 decimal places.
+Select Round(Sum(LAT_N),4) from station
+where Lat_N > 38.7880 and Lat_N < 137.2345;
+
+#11. Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.
+Select Round(Max(Lat_N),4) from station where Lat_N < 137.2345;
+
+#12. Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345 . Round your answer to 4 decimal places.
+Select Round(Long_W,4) from station
+Where Lat_N < 137.2345
+Order by Lat_N Desc Limit 1;
+OR   Select Round(Long_W,4) from station
+Where Lat_N = (select max(lat_N) from station where Lat_N < 137.2345);
+
+#13. Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.7880. Round your answer to 4 decimal places.
+Select Round(min(lat_N),4) from station where Lat_N > 38.7780;
+
+#14. Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than 38.7880 . Round your answer to 4 decimal places.
+Select ROUND(Long_W,4) from station
+where Lat_N = (select min(lat_N) from station where Lat_N > 38.7780);
